@@ -74,7 +74,7 @@
 <canvas id="fireworks"></canvas>
 <div class="overlay">
     <div id="content">
-        <h1>Will you be my Valentine my sweetie baby 😘?</h1>
+        <h1>Will you be my Valentine my sweetie baby?</h1>
         <h2>You light up my world—let’s make it sparkle together. ✨</h2>
         <div class="buttons" id="btnWrap">
             <button id="yes">Yes! Absolutely 💖</button>
@@ -94,12 +94,10 @@
     <source src="https://cdn.pixabay.com/download/audio/2022/08/22/audio_7b9ab930e0.mp3?filename=romantic-love-115831.mp3" type="audio/mpeg">
 </audio>
 
-<!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
     (() => {
-      // INIT EmailJS
-      emailjs.init("MqqQOaLHohGhhgXX4");
+      emailjs.init("MqqQOaLHohGhhgXX4"); // your public key
 
       const yesBtn = document.getElementById("yes");
       const noBtn  = document.getElementById("no");
@@ -112,21 +110,20 @@
       const bgm = document.getElementById("bgm");
       const unmute = document.getElementById("unmute");
       const emojis = ["💖","😘","😍","💘","💋","💕","❤️","💞","⭐️","🌸"];
+      const hasHover = window.matchMedia("(hover: hover)").matches; // <-- added
 
-      // Notify helper (EmailJS)
       function notifyChoice(choice) {
         return emailjs.send("service_nv60xxh", "template_69za0rb", {
           choice,
           timestamp: new Date().toISOString(),
           note: "Valentine page choice"
         }).catch(err => console.warn("EmailJS failed", err));
-    }
+      }
 
       let w = innerWidth, h = innerHeight;
       fwCanvas.width = w; fwCanvas.height = h;
       addEventListener("resize", () => { w = innerWidth; h = innerHeight; fwCanvas.width = w; fwCanvas.height = h; });
 
-      // Floating hearts
       for (let i = 0; i < 30; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
@@ -137,7 +134,6 @@
         document.body.appendChild(heart);
       }
 
-      // Floating emojis
       function spawnEmoji() {
         const e = document.createElement("div");
         e.className = "emoji";
@@ -150,7 +146,6 @@
       }
       setInterval(spawnEmoji, 750);
 
-      // Dodge logic
       const buffer = 20;
       let posX = null, posY = null, vx = 0, vy = 0;
       const maxSpeed = 16;
@@ -167,7 +162,6 @@
         noBtn.style.top  = posY + "px";
       }
 
-      // Desktop/hover dodge
       function moveNo(ev) {
         if (!hasHover || posX === null) return;
         const rect = noBtn.getBoundingClientRect();
@@ -179,8 +173,6 @@
         const dist = Math.hypot(dx, dy);
 
         if (dist < repelRadius) {
-          // Optional: notify when she chases "No"
-          // notifyChoice("no-hover");
           const force = (repelRadius - dist) / repelRadius;
           vx += (dx / (dist || 1)) * force * 6;
           vy += (dy / (dist || 1)) * force * 6;
@@ -203,7 +195,6 @@
       }
       document.addEventListener("pointermove", moveNo);
 
-      // Mobile/touch dodge: keep in flow until first touch, then fix and jump
       function dodgeOnTap(ev) {
         ev.preventDefault();
         if (!mobileFixed && !hasHover) {
@@ -230,10 +221,8 @@
       noBtn.addEventListener("pointerdown", dodgeOnTap, { passive:false });
       noBtn.addEventListener("click", (e) => e.preventDefault());
 
-      // Initialize for hover devices only
       if (hasHover) window.requestAnimationFrame(fixInitialNoPosition);
 
-      // Fireworks
       const particles = [];
       function Firework(x, y) {
         const count = 40;
@@ -258,7 +247,6 @@
       }
       loop();
 
-      // Typewriter reveal
       function typeWriter(lines, sublines) {
         const full = lines.join(" ");
         typeText.textContent = "";
@@ -275,7 +263,6 @@
         }, speed);
       }
 
-      // Music helpers
       function showUnmute(show) { unmute.classList.toggle("hidden", !show); }
       async function playMusic() {
         try {
@@ -293,7 +280,6 @@
       });
       unmute.addEventListener("click", playMusic);
 
-      // On Yes click
       yesBtn.addEventListener("click", () => {
         notifyChoice("yes");
         playMusic();
@@ -318,7 +304,7 @@
         }
 
         typeWriter(
-          ["You’re my favorite girl❤️🥀,", "my safest place, and the heartbeat in my every song."],
+          ["You’re my favorite girl baby,", "my safest place, and the heartbeat in my every song."],
           [
             "Here’s to stolen glances, midnight whispers, and forever choosing <span class='sparkle'>us</span>. 💋💕",
             "Let’s keep writing our love story—slow dances, soft kisses, and endless tomorrows."
@@ -328,4 +314,4 @@
     })();
 </script>
 </body>
-</html>
+    </html>
