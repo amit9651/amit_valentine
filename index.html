@@ -74,7 +74,7 @@
 <canvas id="fireworks"></canvas>
 <div class="overlay">
     <div id="content">
-        <h1>Will you be my Valentine Ananya?</h1>
+        <h1>Will you be my Valentine my sweetie baby 😘?</h1>
         <h2>You light up my world—let’s make it sparkle together. ✨</h2>
         <div class="buttons" id="btnWrap">
             <button id="yes">Yes! Absolutely 💖</button>
@@ -99,7 +99,7 @@
 <script>
     (() => {
       // INIT EmailJS
-      emailjs.init("YOUR_PUBLIC_KEY");
+      emailjs.init("MqqQOaLHohGhhgXX4");
 
       const yesBtn = document.getElementById("yes");
       const noBtn  = document.getElementById("no");
@@ -112,16 +112,15 @@
       const bgm = document.getElementById("bgm");
       const unmute = document.getElementById("unmute");
       const emojis = ["💖","😘","😍","💘","💋","💕","❤️","💞","⭐️","🌸"];
-      const hasHover = window.matchMedia("(hover: hover)").matches;
 
       // Notify helper (EmailJS)
       function notifyChoice(choice) {
-        return emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        return emailjs.send("service_nv60xxh", "template_69za0rb", {
           choice,
           timestamp: new Date().toISOString(),
           note: "Valentine page choice"
         }).catch(err => console.warn("EmailJS failed", err));
-      }
+    }
 
       let w = innerWidth, h = innerHeight;
       fwCanvas.width = w; fwCanvas.height = h;
@@ -319,7 +318,7 @@
         }
 
         typeWriter(
-          ["You’re my favorite girl,", "my safest place, and the heartbeat in my every song."],
+          ["You’re my favorite girl❤️🥀,", "my safest place, and the heartbeat in my every song."],
           [
             "Here’s to stolen glances, midnight whispers, and forever choosing <span class='sparkle'>us</span>. 💋💕",
             "Let’s keep writing our love story—slow dances, soft kisses, and endless tomorrows."
